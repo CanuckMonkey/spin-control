@@ -47,7 +47,7 @@ class Game:
         # Start a new game
         self.all_sprites = pg.sprite.Group()
         self.canvas = Canvas()
-        self.all_sprites.add(canvas)
+        self.all_sprites.add(self.canvas)
         self.playing = True
         #self.painting = False
         self.run()
@@ -63,7 +63,8 @@ class Game:
 
     def update(self, dt):
         # Game loop - update
-        pass
+        for sprite in self.all_sprites:
+            sprite.update(dt)
 
     def events(self):
         # Game loop - process input (events)

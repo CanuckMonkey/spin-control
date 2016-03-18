@@ -1,10 +1,13 @@
 # import pygame as pg
 
+TEST = True
+
 # Game options/settings
 TITLE = "Monkey Paint"
 WIDTH = 800
 HEIGHT = 800
 FPS = 60
+RPM = 30
 
 # Define colours
 WHITE = (255, 255, 255)
