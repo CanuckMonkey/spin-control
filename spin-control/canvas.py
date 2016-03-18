@@ -32,24 +32,19 @@ class Canvas(pg.sprite.Sprite):
 
     def paint(self, dt):
         # Generic painting method
-        vector = np.array(pg.mouse.get_pos()) #, self.clean_center))
-        #vector.shape = (2, 2)
+        vector = np.array(pg.mouse.get_pos())
         coords = vector - self.center_vector
         theta = np.radians(self.rot)
         c, s = np.cos(theta), np.sin(theta)
         R = np.matrix('{} {}; {} {}'.format(c, -s, s, c))
         draw_loc = R.dot(coords) + self.center_vector
-        #draw_loc.shape = (1, 2)
-        print(draw_loc)
         pg.draw.circle(self.clean_image, GREEN,
-                       (int(draw_loc[0,0]), int(draw_loc[0,1])), 10)
+                       (int(draw_loc[0,0]), int(draw_loc[0,1])), BRUSH_SIZE)
 
     def update(self, dt):
         self.rot += RPM * dt * 360 / 60000
         self.rot = self.rot % 360
         if self.painting:
-            #coords = pg.mouse.get_pos
-            #self.coords = pg.math.Vector2(coords)
             self.paint(dt)
         self.image = pg.transform.rotate(self.clean_image, self.rot)
         self.rect = self.image.get_rect(center=self.clean_center)
