@@ -74,9 +74,9 @@ class Game:
                     self.playing = False
                 self.running = False
             elif event.type == pg.MOUSEBUTTONDOWN:
-                canvas.painting = True
+                self.canvas.painting = True
             elif event.type == pg.MOUSEBUTTONUP:
-                canvas.painting = False
+                self.canvas.painting = False
 
     def draw(self):
         #Game loop - draw
