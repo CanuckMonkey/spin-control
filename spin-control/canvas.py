@@ -10,6 +10,7 @@ class Canvas(pg.sprite.Sprite):
         self.image.fill(BLACK)
         self.rect = self.image.get_rect()
         self.clean_center = self.rect.center
+        self.center_vector = np.array(self.clean_center)
         self.rot = 0
         self.painting = False
         pg.draw.circle(self.image, GRAY, self.rect.center, self.rect.h / 2 - 10)
@@ -31,14 +32,17 @@ class Canvas(pg.sprite.Sprite):
 
     def paint(self, dt):
         # Generic painting method
-        vector = np.array((pg.mouse.get_pos(), self.rect.center))
-        vector.shape = (2, 2)
+        vector = np.array(pg.mouse.get_pos()) #, self.clean_center))
+        #vector.shape = (2, 2)
+        coords = vector - self.center_vector
         theta = np.radians(self.rot)
         c, s = np.cos(theta), np.sin(theta)
         R = np.matrix('{} {}; {} {}'.format(c, -s, s, c))
-        draw_loc = R.dot(vector)
+        draw_loc = R.dot(coords) + self.center_vector
+        #draw_loc.shape = (1, 2)
+        print(draw_loc)
         pg.draw.circle(self.clean_image, GREEN,
-                       (int(draw_loc[1,0]), int(draw_loc[1,1])), 15)
+                       (int(draw_loc[0,0]), int(draw_loc[0,1])), 10)
 
     def update(self, dt):
         self.rot += RPM * dt * 360 / 60000
