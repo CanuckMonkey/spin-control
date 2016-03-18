@@ -1,6 +1,9 @@
 # import pygame as pg
 
-TEST = True
+TEST = False
+GUIDES = True
+GUIDE_LENGTH = 40
+GUIDE_WIDTH = 3
 
 # Game options/settings
 TITLE = "Monkey Paint"
