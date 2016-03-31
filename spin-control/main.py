@@ -77,6 +77,17 @@ class Game:
                 self.canvas.painting = True
             elif event.type == pg.MOUSEBUTTONUP:
                 self.canvas.painting = False
+            elif event.type == pg.KEYUP:
+                if event.key == pg.K_EQUALS or event.key == pg.K_KP_PLUS:
+                    if pg.key.get_mods() & pg.KMOD_CTRL:
+                        self.canvas.change_speed(FAST_DRPM)
+                    else:
+                        self.canvas.change_speed(SLOW_DRPM)
+                elif event.key == pg.K_MINUS or event.key == pg.K_KP_MINUS:
+                    if pg.key.get_mods() & pg.KMOD_CTRL:
+                        self.canvas.change_speed(-FAST_DRPM)
+                    else:
+                        self.canvas.change_speed(-SLOW_DRPM)
 
     def draw(self):
         #Game loop - draw

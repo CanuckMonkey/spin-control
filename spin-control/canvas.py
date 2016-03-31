@@ -13,6 +13,7 @@ class Canvas(pg.sprite.Sprite):
         self.center_vector = np.array(self.clean_center)
         self.rot = 0
         self.painting = False
+        self.rpm = RPM
         pg.draw.circle(self.image, GRAY, self.rect.center, self.rect.h / 2 - 10)
         if TEST:
             pg.draw.circle(self.image, BLUE,
@@ -42,9 +43,26 @@ class Canvas(pg.sprite.Sprite):
                        (int(draw_loc[0,0]), int(draw_loc[0,1])), BRUSH_SIZE)
 
     def update(self, dt):
-        self.rot += RPM * dt * 360 / 60000
+        self.rot += self.rpm * dt * 360 / 60000
         self.rot = self.rot % 360
         if self.painting:
             self.paint(dt)
         self.image = pg.transform.rotate(self.clean_image, self.rot)
         self.rect = self.image.get_rect(center=self.clean_center)
+
+    def change_speed(self, ds):
+        """ Change the rotation speed of the canvas by an integer passed
+            to ds. """
+        self.rpm += ds
+
+    def select_colour(self):
+        pass
+
+    def select_brush_size(self):
+        pass
+
+    def select_brush_shape(self):
+        pass
+
+    def save_image(self):
+        pass

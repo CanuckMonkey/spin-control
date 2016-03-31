@@ -13,6 +13,8 @@ WIDTH = 800
 HEIGHT = 800
 FPS = 60
 RPM = 30
+FAST_DRPM = 10
+SLOW_DRPM = 1
 
 # Define colours
 WHITE = (255, 255, 255)
